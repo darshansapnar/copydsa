@@ -79,21 +79,16 @@ public:
             count++;
         }
         
-        if (temp == nullptr) {  // If position is beyond the end
-            cout << "Position out of bounds." << endl;
-            delete new_node;
+       if (temp == nullptr || temp->next == nullptr) {
+            insertAtEnd(val);
             return;
         }
-        
+
         new_node->next = temp->next;
-        if (temp->next != nullptr) {
-            temp->next->prev = new_node;
-        } else { // Inserting at the end
-            tail = new_node;
-        }
-        new_node->prev = temp;
         temp->next = new_node;
-    }
+        new_node->prev = temp;
+        temp->next->prev = new_node;
+        return;
 
     // Delete node from the beginning
     void deleteAtBeginning() {
